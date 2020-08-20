@@ -1,0 +1,15 @@
+1.offset:
+	1.offsetLeft/offsetTop:
+	获取的是先对于最近定位的父元素，没有父元素就是先对于body。
+	elem.offsetLeft/offsetTop
+	2.elem.offsetWidth/offsetHeight;	//获取元素的宽度包括边框和padding的。
+2.client:
+	1.elem.clientleft/top 边框的宽度
+	2.elem.clientWidth/height 屏幕内显示的元素大小包括padding，不到括边框。
+
+3.scroll:
+	1.elem.scrollWidth/elem.scrollheight	//整个元素的内容大小，包括没有显示的,不包括滚动条,包括padding。
+	2.elem.scrollTop/elem.scrollLeft	//box内容滚动的距离，不包括边框。
+	
+elem.pageX/elem.pageY		//鼠标距离文档的点
+

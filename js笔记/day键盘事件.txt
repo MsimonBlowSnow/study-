@@ -1,0 +1,27 @@
+移动端:
+	touchstart touchmove touchend 事件。
+键盘事件:
+	keydown keyup keypress
+		keypress表示按住键盘,按住之后连续触发。
+	
+	keydown>keypress>keyup	
+	keydown 和keypress的区别
+	keydown 可以响应任意键盘按键，keypress只可响应字符(ascll码)键盘按键
+	keypress返回charcode的Ascll码，可以转化成字符
+
+keydown  监测字符类按键不准确
+keypress 监测字符类按键比较精确。
+
+input,fouce,blur,change事件
+	input事件 
+		var input = document.getElementsByTagname('input')[0];
+		input.oninput = function (e){
+			console.log(a);	//里面的文本有变化就会触发。
+		}
+	change事件
+		input.onchange = function (e){
+			console.log('a');	//获取焦点前，和失去焦点发生改变，就会触发，否则不触发(聚焦，改变，失去焦点)。		}
+	onblur事件:失焦事件。
+	onfouce事件:聚焦事件。
+用法:<input onblur = "if(this.value ==''){this.value = '请输入XXX"'}" onfouce = "if(this.value =="请输入XXX"){this.value = ''}" ></input>
+

@@ -1,0 +1,20 @@
+数据定义
+	var a; 声明
+	a=10; 赋值
+	单var 设计
+	var a=10,
+	    b=20,
+	    c=30;
+数据类型
+	原始值(5种):
+	Number Boolean String undefined null
+	引用值
+typeof 返回值 number undefine function object Boolean String
+	其中typeof(null)返回的是object
+	
+
+
+
+NaN===NaN//false
+
+"10">"9";错误;

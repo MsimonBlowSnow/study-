@@ -1,0 +1,65 @@
+js里面的数组:
+	js里面的数组特点:长度不限制，类型不限制.不过还是有length属性。
+	1.定义一个数组2种方法:
+		var b= new Array(7);//数字类型是定义一个多长的数组，值为undefined，字符类型就是一个长度为一，b[0]=字符的数组。
+
+2.存取:
+	b[index];或者 b["index"]
+	数组就像对象一样b["index"]
+	b数组b{
+		0:值,	
+		index:值;		}
+	建议用b[index];
+
+3.使用数组对象:
+	3.1遍历数组:
+		1.for(var i in a){
+			alert(a[i]);
+		}
+		2.for(var i;i<a.length;i++){
+			alert(a[i]);
+		}
+	3.2操作元素
+		数组类是与对象
+			delete b[index];	//删除b数组索引为index的元素，长度不变，index索引会为undefined。
+	3.3数组的添加删除方法
+		a.push(b); 	给数组添加b元素在数组的末尾,返回添加后的数组长度;
+		a.pop();	删除数组的最后一个元素并返回该元素;
+		a.unshift(b);	在数组第一个位置插入b,即a[0]=b;返回添加后的数组长度;
+		a.shift();	将第一个元素移除数组，并返回移除的元素。
+		b.concat(c,d);	连接数组，在后面添加c,d,并返回连接后的数组的长度。
+	3.4操作子数组
+		splice() 	插入，删除，替换数组的元素;			
+		splice()的用法:
+			var a=[1,2,3,4,5];
+			a.splice(1,2,3,4,5);
+			alert(a);	//[1,3,4,4,5]
+			第一个参数是执行的元素的索引，第二个参数是从开始位置到结			束位置的元素个数，第三个是代替数组。
+			splice()，一个参数是删除该索引后的所有元素，两个参数删除从索引开始数的个数，3个参数是用第三个参数以后当作数组代替前面的元素。
+		slice();截取数组元素，不影响数组。
+		一个参数是截取元素到末尾元素，两个参数是从第一个参数到末尾参数。	3.5数组的排序
+		reverse();倒叙原始数组,并返回。
+
+数组去重:
+	1.Array.prototype.unique = function (){
+		var arr=[];
+		for(prop in this){
+			if(arr.indexOf(this[prop]) == -1){
+				arr.push(this[prop]);
+			}
+		}	
+		return arr;
+	}
+	
+	//通过对象的属性值不唯一去重
+	2.Array.prototype.unique = function(){
+		var temp ={};
+		    arr=[];
+		for(var i=0;i<this.length;i++){
+			if(!temp[this[i]]){//把数组的值变为了对象的键,判断当前位的值。
+				temp[this[i]] = "abc";	//要一个转化不为false的值。
+				arr.push(this[i]);
+			}
+		}
+		return arr;
+	}			

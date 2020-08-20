@@ -1,0 +1,82 @@
+原型：
+	1.定义:原型是function对象的一个属性，它定义了构造函数制造出的对象的共同祖先。通过该构造数产生的对象，可以继承该原型的属性和方法。原型也是对象。
+	2.利用原型特点和概念，可以提取共有属性。
+	3.对象如何查看原型-->隐式属性__proto_
+	4.对象如何查看对象的构造函数——>constructor
+
+	//Person.prototype     ----原型
+	//person.prototype={}    是祖先,是该构造函数的祖先，通过构造函数的构造的对象可以调用祖先的属性。当自己没有该属性回去原型里面找。
+	Person.prototype.LastName="Ming";
+	//大驼峰模式
+	function Person(){
+
+	}
+	var person =new Person(); 	//这个对象有一个属性 person.LastName等于"Ming"
+	var person1=new  Person(); 	//这个对象有一个属性 person.LastName也等于"Ming"
+	person.LastName="ming1" 	//改变的并不是原型的，而是对象的
+	person.prototype.LastName	//改变的是模型属性。
+原型的利用:
+	例如：
+		//大驼峰式
+	function Person(){
+		this.age=0;	//通过该构造函数创建的对象都有这两个属性，不过每次创建都会执行这两句,代码冗余，解决方法:定义到原型里面去
+		this.type=human;
+	}	
+
+	如
+		方法一:Person.prototype.age="0";Person.prototype.type="human";
+		方法二:Person.prototype={
+			age:0;
+			type:human
+		}
+		function Person(){}
+
+	Person.prototype有一个constructor构造期，通过该方法产生的对象可以调用constructor访问构造函数。不过constructor可以通过prototype 去更改。
+	
+__proto__是一个属性在三段式里面默认的属性
+	var this={
+		__proto__:prototype; //系统默认。
+	}
+__proto__是系统默认的，可以修改，不过不建议修改。
+
+
+例题:
+	Person.prototype.name="ming"
+	function Person(){
+		//var this={
+		//	__proto__:Person.prototype;
+		//}	//系统默认加上
+	}
+
+	var person1=new Person();
+
+	Person.prototype(){
+		name:'cherry';
+	}
+	
+	console.log(person1.name);	//ming, 因为他指向的还是那个__proto__的对象。
+
+
+
+ 	Person.prototype.name="ming"
+	function Person(){
+		//var this={
+		//	__proto__:Person.prototype;
+		//}	//系统默认加上
+	}
+	var person1=new Person()
+	Person.prototype.name="cherry";
+	console.log(person1.name);	//cherry,没有换对象。
+
+	Person.prototype.name="ming";
+	function Person(){
+		//var this={
+			__propo__:Person.prototype;	
+		//}	
+	}
+	Person.prototype={
+		name:"cherry";
+	}
+	var person1=new Person();
+	console.log(person1.name);	//cherry ,先变得原型对象，在创建的实例对象。
+

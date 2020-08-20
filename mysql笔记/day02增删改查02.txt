@@ -1,0 +1,28 @@
+1.union 操作符
+	union 
+		1.是将多个查询联合在一起(纵向)，合并到一起展示的查询
+		2.常见，在数据量大的情况下,会对表进行分表操作,需要对每张表进行部分数据统计，使用联合查询来将数据放在一起显示
+	mysql union 操作符用于两个以上的select语句的结果结合到一个结果集合中。多个select语句会删除重复的数据
+	select field1,field2 from tables [where conditions] union [ALL|DISTINCT] select field1 field2 from tables [where conditions];
+	例如:
+		union 默认时使用distinct 去除俩个查询重复的元素
+		all 是不去处两个查询中重复的元属
+	如果一个表中没有设置primary key 可以使用union去处重复元素
+	select * from table_name union select * from table_name wherefalse;	//去处重复
+
+	注意:使用union条件:段名称可以不同，字段数量、数据类型、顺序必须相同。
+	UNION 操作符用于合并两个或多个SELECT 语句的结果集。
+
+总之:
+	把两个select语句联合起来,默认使用union distinct，去重
+	把两个select语句联合起来,不去掉重复,使用 union all
+
+order by顺序:使用order by 语句给select的结果进行排序
+	如:
+		select * from table_name  order by id asc|desc
+		查询的数据通过id进行排序  asc生序排序|desc降序排序
+	
+注意:在联合查询中要使用order by,语句必须要用(),如果要生效必须使用limit,而limit后面必须更数据，一般要跟一个大于联合表的记录数
+(select * from student where sex='1' order by height asc limit 10)
+ union
+(selct * from student where sex='0' order by height desc limit 10);

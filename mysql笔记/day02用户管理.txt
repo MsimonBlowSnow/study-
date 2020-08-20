@@ -1,0 +1,9 @@
+1.mysql5.7(以上)中mysql数据库的user表中password字段被改为anthentication_string。
+2.创建用户的命令:
+	使用超级用户登入后 create user 'testuser'@'localhost' identified by 'testpassword'
+
+3.使用特定的用户登入:
+	mysql -uuser -p
+4.修改用户的密码
+	在终端中:mysqladmin -uuser -p password [新密码]
+回车后输入旧密码

@@ -1,0 +1,62 @@
+Window 对象:
+	BOM 的核心对象window对象，它表示浏览器的一个实例:
+	javascript访问浏览器的一个接口
+	Ecmascript规定的全局对象
+全局作用域:
+	所有的全局域声明的对象和变量都会成为window对象的属性和方法
+	注意:
+		全局变量不能通过delete操作符删除，而直接在window对象上的定义的属性可以。
+		如：
+			var a = 29;	//全局变量
+			delete window.a;	//删除不了,返回false
+			alert(a);		//29
+			window.color="red";
+			delete window.color;	//可以删除,返回true
+			alert(window.color);	//undefined;
+系统对话框:
+	alert();	//警告框
+	confirm();	//确认框
+	promot();	//提示框
+	print();	//打印
+	find();		//查找
+
+
+//关闭打开window;
+<button onclick = "openWindow()">百度</button>
+<button onclick="closeWindow()">关闭</button>
+<script>
+   var newWindow;
+function openWindow(){
+	newWindow = window.open("http://www.baidu.com", "newWindow", "width=1024, height=700, top=0, left=0, titlebar=no,menubar=no,scrollbars=yes, resizable=yes, status=yes, , toolbar=no, location=yes");
+
+   //newWindow.resizeTo(500,500);
+
+   //newWindow.moveTo(100,100);
+}
+
+function closeWindow(){
+   newWindow.close();
+   newWindow.top
+}
+</script>
+
+//窗口位置:
+	screenLeft和screenTop，表示窗口相对于屏幕左边和上边的位位置
+	screenX 和 screenY ，提供相同的窗口位置信息
+	moveTo(), 将窗口精确地移动到一个新位置, 接收的是新位置的 x 和 y 坐标值 
+	moveBy(), 将窗口精确地移动到一个新位置, 接收的是在水平和垂直方向上移动的像素数 
+//窗口大小:
+	innerWidth和innerHeight，返回该容器中页面视图区的大小（减去边框宽度）  
+	outerWidth 和 outerHeight， 返回浏览器窗口本身的尺寸 
+	resizeTo()接收浏览器窗口的新宽度和新高度 
+	resizeBy()接收新窗口与原窗口的宽度和高度之差
+
+// 间歇调用和超时调用
+    JavaScript 是单线程语言，它有一个任务队列，队列里的任务按顺序执行。
+	我们点击一个按钮触发一个事件，此时该事件会被添加到任务队列里边，如
+	果当前队列是空的，那么立即该事件；如果不是空的，
+	那么等前面的任务执行完了以后再执行该事件。也就是说，
+	JS里边的代码都不是立即执行的。
+	超时调用：指定的时间过后执行代码。
+
+

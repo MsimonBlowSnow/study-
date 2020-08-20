@@ -1,0 +1,82 @@
+es6增加了let和const命令来要求变量的声明,let和const会把变量都会变成块级作用域，且不能重新声明。
+块作用域:
+	1.用var声明的最小作用域为函数
+	{var a=19}
+	console.log(a);	//19
+	2.用const和let声明的变量(let)和常量(const)的作用域为{};
+	{const/let a=20}
+	console.log(a);	//报错
+
+const:声明常量，并且给变量变为块级作用域变量.
+
+let:声明常量，声明不会上升，且变为块级作用用例如:
+	var a="mmp";
+	{
+		a="1";	//报错，let不能声明		   提升。
+		let a = 9;
+	}
+let和const同一个块级作用域不能重复声明,不过不同作用域可以声明同一个变量:
+	let a=9;
+	let a=10;	//报错
+	const b=12;
+	const c=90;	//报错
+例题://考块级左右域
+	var arr = [];
+	for(var i=0;i<10;i++){
+		a[i] = function(){
+			console.log(i);
+		};
+	}
+	a[1]();	//10
+
+	var a = [];
+	for(let i =0;i<10;i++){
+		a[i]= function (){
+			console.log(i);
+		}
+	}
+	a[1]();	//1;
+
+解析:let声明的变量为块级作用域,当前的i只在本轮循环有效,所以每一次循环的i其实都是一个新的变量,所以最后输出的是1，而var声明的是一个新的变量,所以最后输出的是6。
+
+例题:考变量是否提升:
+	console.log(foo);//undefind
+	console.log(bar);//报错
+	var foo = 2;
+	let bar = 2;
+解析:let变量不能提升，var变量声明提升
+
+例题:暂时性死去:
+	var tmp = 123;
+	{
+		tmp ="abc";//报错
+		typeof tmp//报错
+		let tmp;
+	}
+
+上面代码中，存在全局变量tmp，但是块级作用域内let又声明了一个局部变量tmp，导致后者绑定这个块级作用域，所以在let声明变量前，对tmp赋值会报错.
+
+
+ES6引入了块级作用域，明确允许在块级作用域之中声明函数。
+
+结构赋值
+    1.数组的结构赋值
+	var [a,b,c] = [1,2,3]；	//相当于var [a,b,c] = [1,2,3]
+	let [a,b,c] =[,2,]; //相当于let a,b=2,c;
+	默认值:
+		let [a=1,b,c=3] = [,2,4] //a=1,b=2,c=4
+		其中a和c有默认值;
+    2.对象的结构赋值
+	//foo = "hello" bar = 'hi'
+	let{foo,bar} = {foo:"hello",bar: 'hi'};	
+	
+	let[foo:abc,bar] = {foo:'hi',bar:'你好'}
+		abc有效，foo无效 abc = "hi"
+
+
+
+
+
+
+
+

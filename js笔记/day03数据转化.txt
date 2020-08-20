@@ -1,0 +1,8 @@
+数据类型转化:
+	隐私类型转化:
+		1.var b="2"*"2";
+		  alert(b);//b=4
+		2.任何类型碰到了+并且有字符串参加,都变为字符串类型
+	显示类型转化:
+		1.Number();转化，number转化"1aaa",undefined为NaN,null为0
+		2.Boolean();转化 "",0,undefined,null 为false 

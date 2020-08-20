@@ -1,0 +1,22 @@
+arguments:
+	arguments.callee:指向这个函数的引用。
+	var test(){
+		console.log(arguments.callee);	//指向为callee函数
+	}
+	test();		//打印test()函数。
+使用用于立即执行函数:如
+	var num=(function (n){
+		if(n==1){
+			return 1;
+		}
+		return n * arguments.callee(n-1);	//使用arguments的callee指向函数的自身引用。
+	})(100);
+
+func.caller:指向调用本身函数的环境。
+	function test(){
+		demo();
+	}
+	
+	function demo(){
+		demo.caller;	//打印test(){...}函数。	
+	}

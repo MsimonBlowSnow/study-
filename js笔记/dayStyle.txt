@@ -1,0 +1,13 @@
+1.访问css行内样式:
+	style 包括了通过HTML的style属性设置的所有css样式信息,但是只能包括行内样式，不能包括样式表的样式。
+	注意:注意关键字罗float变为了cssFloat,不能有-如border-right-color变为borderRightColor
+使用style对象
+	cssText:访问HTML标签中style属性的css代码。
+	length:元素定义的css属性的数量
+	parentRule : 表示css的CSSRule对象
+	getPropertyCSSValue(): 返回包括给定属性的cssValue对象
+	getPropertyPriority(): 返回指定css属性中是否附加了！important命令
+	item():返回给定位置的css属性的名称
+	getPropertyValue():返回给定属性的字符串值
+	removeProperty(): 从样式中删除给定属性	
+	setProperty(): 将给定属性设置为相应的值，并加上优先权标志。

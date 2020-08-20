@@ -1,0 +1,8 @@
+json:
+	{
+		"name":ming,
+		"age":22,
+	}
+	json的属性名必须加双引号
+	
+	

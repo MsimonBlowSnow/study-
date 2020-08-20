@@ -1,0 +1,48 @@
+es3和es5产生冲突的部分:
+	es5.0严格模式的启动：
+		在最顶端写一个“use strict”
+		callee和caller不能在es5生效
+	<sricpt>
+		"use strict";
+		function test(){
+			//"use strict"	//2.局部函数内严格模式。
+			console.log(arguments.callee);	//callee不能在es5严格模式里面
+		}
+	<sricpt>
+	
+es5严格模式使用方法
+	1.全局严格模式		
+	2.局部函数内严格模式	(推荐),使用在局部函数的最顶端，如第8行
+
+es5严格模式:
+	1.不能用with(),改变了原型链，降低了代码执行效率。
+		with(obj){
+			console.log(name);//把obj当作第一个AO，
+		}
+		with(document){
+			write('a');
+		}相当于document.write('a');
+	2.不支持arguments.callee,和function.caller.
+	3.变量赋值前必须声明。
+	4.局部的this必须被赋值，赋什么值就是什么值
+		"use strict"
+		function(){
+			console.log(this);
+		}
+		test();		//undefined
+		new test();	//该对象的construct,test();
+		test.call(obj);	//this指向obj,可以是剧本数据类型，不是严格模式一定要用对象，基本数据类型会自动包装类。
+	5.拒绝重复属性和参数。
+		function(name,name){
+			console.log(name);
+		}
+		在严格模式里面会报错。
+		var obj={
+			name:"da",
+			name:"da"
+		}不会报错。
+
+	es3不能使用eval();
+
+ES5规定，函数只能在顶层作用域和函数作用域之中声明，不能在块级作用域声明。
+不过普通模式下不会报错，严格模式下会报错。

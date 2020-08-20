@@ -1,0 +1,48 @@
+try{}catch(){}		保证后面的代码正常执行。
+	try{
+		console.log('a');
+		console.log(b);//出错，不执行
+		console.log('c');//不执行	
+	}catcth(e){
+		console.log(e);	//执行
+	}
+	console.log('d');
+上面的代码打印ad，b出错。console.log('c')不执行，try{}catch{}后面正常执行。
+	
+Error.name的六种值对应的信息:
+	EvalError:eval()的使用与定义不一致。
+	RangeError:数值越界
+	ReferenceError:非法或不能识别的引用数值。
+	SyntaxError: 发生语法错误解析错误	//编译前，通便扫描,语法出错了就不会执行js,不会执行try{}catch(e){};
+	TypeError: 操作数类型错误
+	URIError:URI处理函数使用不当。
+
+Error:普通异常。通常与throw语句和try/catch语句一起使用。使用属性name可以声明或了解异常的类型，
+      利用message属性可以设置和读取异常的信息，主要给程序员自定义异常。
+
+Error.message 是每个浏览器都支持的。
+
+
+finally:作后最后一步会执行finally。
+例如:	function hi(){
+		try{
+			return 2; 
+		}catch(e){
+			return 1;
+		}finally{
+			return 0
+		};
+	}
+	hi();	//返回的是0，因为了return 0 把return 2给覆盖了，不过java不会这样，java先建好了管道文件。
+
+注意: 因为ie7的bug，使用finally一定要用catch，为了兼容性考虑，即使没有catch的相关内容,一般都会写一个空的catch.
+
+throw:
+	1.用于抛出自定义异常，抛出错误时，必须要给throw操作符指定一个值，这个值不要求类型。
+	2.在遇到throw时代码会停止执行，只用在遇到try{}catch(){}才会继续执行。
+
+例如:
+	throw "1";
+	throw 1;
+	throw {name : "js"};
+	throw new SyntaxError("抛出错误");

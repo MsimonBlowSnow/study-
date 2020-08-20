@@ -1,0 +1,47 @@
+this 对象:
+	1.函数预编译 this->window
+	2.全局作用域this->window
+	3.call/Apple 可以改变函数运行时this指向
+	4.obj.func(); func()里面的this指向obj
+例题:
+	var name="222";
+	var a={
+		name:"111",
+		say : function(){
+			console.log(this.name);
+		}	
+	}	
+	var fun=a.say;
+	fun();		//222
+	a.say();	//111
+
+	var b = {
+		name : "333",
+		say : function(){
+			fun();
+		}
+	}
+	b.say(a.say);	//222 b.say的this->b,不够fun();走的时预编译环节，fun()里面的this->window;所以是222。
+	b.say=a.say;	//333
+	b.say();
+
+例题:
+	var foo=123;
+	function print(){
+		this.poo=234;
+		console.log(foo);
+	}	
+
+	print();	//234,this->window,把123改变为234。
+	new  print();	//123,this->New object的obj
+
+例题 	var a=5;
+	function test(){
+		a=0;
+		alert(a);
+		alert(this.a);
+		var a;
+		alert(a);
+	}
+	test();		//050
+	new test();	//0undefined0

@@ -1,0 +1,9 @@
+简单动画的实现:
+	var timer = setInterval(function (){
+		if(elem.offsetLeft >= 500){
+			clearInterval(timer);
+			return false;
+		}else{
+			box.style.left = box.offsetLeft + 5 + "px";
+		}
+	},30)

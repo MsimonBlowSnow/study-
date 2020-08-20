@@ -1,0 +1,54 @@
+1.修改:
+update table_name set field1=new-value1,field2=new-value2[where clause
+更新数据的内容 table_name 表中的 field1字段,和field2字段
+
+2.删除:
+delete from table_name [where]
+
+注意一定要加上where否则会把数据表清空
+
+3.查找:
+1.select column_name,columm_name from table_name [where clause] [limit n] [offset m]
+        select命令可以读取一条或者多条记录
+        * 表示所有的列
+        where 便是查询的条件
+        limit 设置返回的记录数，(从第几条开始)
+        offset 指定数据的偏移量，(查询的数量)
+4.插入
+1.插入数据
+        1.insert into [表名] values(信息);
+                信息根据表结构一一对应,可以忽略自增数据
+        2.insert into 表名 (列名) values (信息);
+                信息根据列名一一对应
+注意:如果是字符串类型，必须使用‘’或者“”
+
+
+5.where的使用
+1.where在使用select 和delete等等语句都要用到
+(1)操作符：
+        =    等于  (A=B)返回false/true
+        <>,!= 不等于 (A!=B)返回true/false(<>和!=)都是不等于
+        >   大于 (A>B)false
+        <  小于  (A<B)false
+        >= 大于或者等于         (A>=B)
+        <=      小于或者等于    (A<=b)
+注意:使用=如果是字符则不区分大小写,     ('A'='a')true;
+如果您要区分大小写就使用binary例如: 
+        select * from tables where id="A";//会把id为'a'的也会输出
+        select * from tables where binary id ="A"//只会输出id为"A":		
+
+
+6like语句
+	使用like进行模糊查询
+		select * from table_name where	field1 like condition1 [AND [OR]] field2 = "XXX"
+在where中like进行查询
+	1.like 通常与 %,_,等使用
+		%表示任意个或者多个字符
+		_表示一个字符如:
+	select * from user where id like '%m_m%';//
+		满足条件:	1dafdmrmadfad 有一个%m_m%
+	2.使用or或则and
+		select * from table where id=5 or id=3
+		查询id是3或者是5的记录
+		select * from table where keyword=5 and user=ming	//查询keyword是5并且 user为ming的记录
+	

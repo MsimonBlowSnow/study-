@@ -1,0 +1,12 @@
+类数组
+	function test(){
+		console.log(arguments);//arguments  是一个类数组。
+	}
+	类数组:
+	var obj={
+		"0":"a",
+		"1":"b",
+		"2":"c",
+		"length":3,
+		"push":Array.prototype.push;	
+	}

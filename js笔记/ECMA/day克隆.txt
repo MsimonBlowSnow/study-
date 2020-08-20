@@ -1,0 +1,69 @@
+克隆：
+	1.浅层克隆:更改obj1的引用值也会更改obj的引用值。
+	var obj={
+		name : "ming",
+		age : "18",
+		sex : "男",
+		card :[1,2,3]
+	}
+	var obj1 = {};
+	function clone(orgin,target){
+		var target=target||{};
+		for(var prop in obj){
+			target[prop]=origin[prop];
+		}
+		return target;
+	}
+	clone(obj,obj1);
+	
+	2.深度克隆:
+		var obj={
+			name:"abc",
+			age:123,
+			card:{'visa,'master'},
+			wife:{
+				name:"bdc",
+				son:{
+					name:"aaa";
+				}
+			}
+		};
+
+1.		function copy (obj) {
+       			 var newobj = obj.constructor === Array ? [] : {};
+       		 	if(typeof obj !== 'object'){
+           			 return;
+       			 }
+       		 	for(var i in obj){
+          			newobj[i] = typeof obj[i] === 'object' ?
+           			copy(obj[i]) : obj[i];
+       		 	}
+        		return newobj
+   		 }
+
+//2.	function deepClone(origin, target){
+		var target = target||{};
+		toStr = Object.prototyep.toString;
+		arrStr = "[object Array]";
+		
+		for(var prop in origin){
+			if(origin.hasOwnProperty(prop)){
+				if(typeof(origin[prop]) == "object"){
+					if(toStr.call(origin[prop]) == arrStr){
+						target[prop] = [];
+					}else{
+						target[prop] = {};	
+					}
+					deepClone(origin[prop],target[prop]);
+				}else{
+					target[prop]=origin[prop];
+				}
+			}
+		}
+		
+	}
+数组也可以forin
+	var a=[1,2,3,4,5];
+	for(obj in a){
+		consolo.log(a[obj]);
+	}

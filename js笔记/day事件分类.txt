@@ -1,0 +1,14 @@
+鼠标事件:
+	click,mousedown,mousemove,mouseup,contextmenu,mouseover,mouseout,mouseenter,mouseleave
+	click = mousedown +mouseup;
+	mouseover 当鼠标进入时，发生
+	mouseout 当鼠标移除。
+用button来区分鼠标的键盘
+	mousedown和mouseup事件。
+	event.button == 0 为鼠标左键
+	event.button == 2 为鼠标右键。
+DOM3标准规定:click事件只能监听左键，只能通过mousedown 和 mouseup 来判断鼠标标键。
+
+如何解决mousedown 和click的冲突。
+
+onscroll 滚动时触发事件。

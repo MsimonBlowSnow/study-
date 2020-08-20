@@ -1,0 +1,7 @@
+窗体事件:
+	sroll事件:	window上的事件
+		onsroll = function (){
+			alert('a');	//当滚动条滚动时就发生该事件
+		}
+	 load事件:
+		load事件发生在文档加载完，后执行。

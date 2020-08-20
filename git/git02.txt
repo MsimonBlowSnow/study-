@@ -1,0 +1,7 @@
+1.git reset --hard HEAD~0 //会退到最后一次提交的状态。
+ git reset --hard HEAD~1 //会回退到最后第二次提交的状态。
+2.git reset --hard [版本号]
+	可以通过git log --oneline来查看版本号
+git log --online 只能看到前面提交的。当你改到第一次提交的之后后悔了，可以使用:
+git reflog  来查看后面提交的版本号，并用
+git reset --hard [版本号]来返回后面的版本号。

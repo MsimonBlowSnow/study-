@@ -1,0 +1,49 @@
+取消冒泡:
+	w3c标准event.stopPropagation();但是不支持ie9以下的版本
+	IE独有event.cancelBubble = true;
+	封装取消冒泡函数stopBubble(event);
+	
+	每个事件函数都可以传一个参数即事件对象，如:
+	div.onclick = function(e){
+		e.stopPropagation();	//ie9不好使，取消冒泡
+		e.cancelBubble = ture; //取消冒泡
+		console.log(e);	//e是一个事件对象包括了事件的很多属性。
+	}
+	
+阻止默认事件:
+	默认事件 -- 表单提交，a标签跳转，右键菜单等
+		如:浏览器默认事件，document.oncontextmenu();右键出菜单事件。
+	1.return false;以对象性的方法注册的事件才有效。
+		例如:取消默认右键菜单默认事件
+			document.oncontextmenu = function(){
+				alert("右键你mp");
+				return false;
+			}
+	2.event.preventDefault();//W3C规定，IE9不兼容。
+		例如:取消默认右键菜单默认事件
+			document.oncontextmenu = function(e){
+				alert("右键你mp");
+				e.preventDefault();
+			}
+		如果用addEventListence()不能用return false;	
+	3.event.returnValue = false;//兼容ie
+		document.oncontextmenu = function (e){
+			alert("右键无效");
+			e.returnValue = false;
+		}
+
+封装取消默认事件函数:
+	function cancelHandler(event){
+		if(e.preventDeault){
+			e.preventDefault();
+		}else{
+			e.returnValue = false;
+		}
+	}
+
+
+例题:
+	取消a标签默认跳转事件。
+	a.onclick = function (){
+		return false;
+	}	

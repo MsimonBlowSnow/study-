@@ -1,0 +1,67 @@
+js执行三过程:
+	语法解析,预编译,执行
+	执行是翻译一句执行一句
+
+	函数声明整体提升,变量声明声明提升，
+	函数声明整体会提升到最上面，变量声明，只有变量声明的部分提升。
+
+预编译前奏:
+	1.imply global 暗示全剧变量 任何变量没声明直接赋值，他就会被全局变量(windw)所有。
+	2.一切声明的全局变量都归window所有，即 var a=123;相当与window{ a:123;} alert(window.a);//123
+预编译：
+	1.函数的预编译
+		预编译发生在函数执行的前一刻。
+		1.创建AO对象（执行上下文）
+		2.找形参和变量声明,将变量声明和型参名作为AO对象的属性名，值为undefined
+		3.将实参值和型参统一
+		4.在函数体里面找到函数声明,值给函数体
+	例如:
+		function test(a){                                       | AO{
+			alert(a);	//function a(){}           	|	编译期:a:undefined; 1, function a(){}   执行期   123 
+			var a=123;	//AO对象里面的a属性变为123;     |			b:
+			alert(b);	//                              |
+			var b=43;                                       | 
+			alert(b);                                       |
+			alert(a);      //123                            |   
+			function a(){}	//已经编译过了                  | 
+			alert(a)；     //123                            | 
+			var b=funtion(){}   //编译期不执行	        | }
+			alert(b);//function()
+		}		 
+		test(1);
+
+	2.全局:1.生成go(window)对象 没有第三部 其他一样；
+
+
+错题:
+	global=100;
+	function fn(){
+		console.log(global);	//undefined AO里面的undefined
+		global=200;		//AO里面的undefined;
+		console.log(global);  //200
+		var global=300;
+	}
+	fn();
+	var global;
+
+例题:
+	function print() {
+		console.log(foo);
+		var foo=2;
+		console.log(foo);
+		console.log(hello);	//报错，hello is undefined
+	}
+
+	print();	//undefined 2 报错
+
+例题:
+	var bar = {a:"002"};
+	function print(){
+		bar.a='a';
+		Object.prototype.b='b';
+		return function(){
+			console.log(bar.a);	//a
+			console.log(bar.b);	//b
+		}
+	}
+	print()();	//ab

@@ -1,0 +1,36 @@
+Dom增加操作
+	document.createElement();	//创建一个元素节点
+	document.createTextNode();	//创建一个文本节点
+	document.createComment();	//创建一个注释节点
+	document.createDocumentFragment();	//创建一个文档碎片节点
+
+插入:
+	PARENTNODE.appendChild();	//相当于push,添加在兄弟节点的后面，把一个页面已经有的节点操作插入到另一个位置相当与剪切操作。父节点调用该方法。
+	PARENTNODE.insertBefore(a,b);	//把a插入到b节点的前面。父节点调用该方法。
+删除:
+	parent.removeChild( child );	//父节点删除子节点,从html中剪切出来
+	child.remove();		//节点自己删除自己。
+替换:
+	parentNode.replaceChild(new ,origin);	//用new替换origin,origin被剪切出来了。
+
+
+例题1:封装一个insertAfter;
+	   Element.prototype.insertAfter=function(after,elem){
+                    if(elem.nextSibling)
+                        this.insertBefore(after,elem.nextSibling);
+                    else{
+                            this.appendChild(after);
+                    }
+            }
+例题2:封装一个倒叙子节点:
+	Element.prototype.reverseSonNodes = function (){
+           var sons = [];
+             while(this.firstChild){
+            	 sons.push(this.removeChild(this.firstChild));
+                 //  console.log(sons);
+             }
+             console.log(sons);
+            for(var i = sons.length-1; i > -1; i--){                       
+			this.appendChild(sons[i]);
+            }
+        };		

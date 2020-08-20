@@ -1,0 +1,38 @@
+Call()是一个方法的执行面目:
+	function test()间接调用test.call();
+	
+	function Person(name,age){
+		this.name=name;
+		this.age=age;
+	}
+	var obj=new Object(){};
+	Person.call(obj,"ming",10000);	//调用点call来改变this指向,把this变为obj
+	console.log(obj);	//obj={name:"ming",age:10000}
+	console.log(obj.name);	///name
+	console.log(obj.age);	//10000
+
+call的开发应用
+	function Person(name,age){
+		this.name=name;
+		this.age=age;
+	}
+
+	function Student(name,age,sex){
+		Person.call(this,name,sex);
+		this.sex=sex;
+	}
+2.Apply()方法传的是一个对象
+	function Person(age,name){
+		this.age=age;
+		this.name=name;
+	}
+	age=100;
+	name="ming";
+	Person.call(obj,[age,name]);
+	console.log(obj.age);	//age=100
+	console.log(obj.name);	//name="ming";
+
+Apply 和 call 类似，不过call传的是多个参数，Apply()只能传一个对象，不过可以把参数变成数组形式如 Person.Apply(obj,[age,name]),和Person.call(obj,age,name);作用一样。
+
+
+

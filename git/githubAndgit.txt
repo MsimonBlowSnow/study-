@@ -1,0 +1,16 @@
+1.在Github创建一个仓库，会给你一个地址，git可以通过这个地址把本地代码放入Github的仓库里面
+
+git 把文件放入仓库里面
+	git push [地址] mater会把当前的分支传到远程的分支里面
+git 把远程的代码放入仓库里面
+	git pull [地址] master 会把远程的文件下载到自己的文件里面
+git clone [地址] 会把远程文件都拿过来(不过会新建一个文件名即远程项目的文件名)一般使用pull的方法获取文件。如果多次执行会覆盖本地内容
+
+pull 和clone 前者不会覆盖，是一个合并分支的操作，而后者会覆盖本地的git和代码。
+
+git remote add origin [地址] 之后提交就可以使用 origin 代替[地址]了
+git push orgin master 就相当于 git push [地址] master.
+
+-当我们在push后面加了一个-u 那么下一次push时 我们只需要写上'git push'就能上传我们的代码了，(加上-u之后，git会指定当前分支与远程的指定的分支进行关联。
+相当于git push [地址] master).
+git push origin -u master

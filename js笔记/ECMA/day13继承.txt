@@ -1,0 +1,62 @@
+继承的实现的方法:
+    1.  Grand.prototype.LastName="ming"
+	function Grand(){}
+	function Father(){}
+	function son(){}
+	
+	var grand=new Grand();
+	Father.prototype=grand;
+	var father=new Father();
+	Son.prototype=father;
+	var son = new Son();	
+通过该方法的继承把一些没用的属性也继承了，不推荐。
+2.通过call()和apply()来继承严格上说不是继承(开发中常用)
+	
+	function Person(age,name){
+		this.age=age;
+		this.name=name;
+	}
+	
+	function Student(age,name,ID,class){
+		//利用call()改变this的指向，传参数可以是多个参数	
+		Person.call(this,age,name);
+		this.ID=ID;
+		this.class=class;
+	}
+通过call()继承
+
+	function Person(age,name){
+		this.age=age;
+		this.name=name;
+	}
+	function Student(age,name,ID,class){
+		//通过Apply()传参数必须是一个数组对象，只能有一个参数
+		Person.Apply(this,[age,name]);
+	}
+
+
+3.最好的一种方法//共有原型
+	Father.prototype.LcastName="Deng"	
+	function Father(){
+		
+	}
+	
+	function Son(){
+	}
+	
+	//target 继承Orign	
+	function inherit(target,Orign){
+		target.prototype=Orign.prototype;
+	}
+	//Son.prototype=Father.prototype;
+
+缺点:如果想修改son的原型，就会修改father的原型。
+修改:将inherit()方法改为
+	function inherit(target,Orign){
+		Function F(){};
+		F.prototype=Orign.prototype;
+		target.prototype=new F();
+		target.prototype.constuctor=target;	//保证构造函数是自己
+		target.prototype.uber=Origin.prototype;
+	}
+4.

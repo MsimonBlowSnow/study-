@@ -1,0 +1,22 @@
+重写typeof
+	function mytypeof(target){
+		var template ={
+			"[object Array]":"Array",
+			"[object object]":"object",
+			"[object Number]":"Number-object",
+			"[object boolean]":"boolean-object",
+			"[object String]":"string-object",	
+		}
+		//1.区分引用值
+		//2.区分原始值
+		var ret=typeof(target);
+		if(target == "null")
+			return "null";
+		if(ret == "object"){
+			//数组，对象，包装类
+		 	var toStr=Object.prototype.toString.call(target);
+			return template[toStr];
+		}else{
+			return ret;
+		}	 
+	}

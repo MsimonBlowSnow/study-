@@ -1,0 +1,95 @@
+对象的基本格式:
+	var ming={
+		name:"ming";
+		age:"20";
+		sex:"男";
+		hobby:function(){
+			alert(this.name+"coding");//对象内的方法调用对象属性用this
+		      }
+		属性名:"值".....
+	}
+	//调用一个属性
+		ming.age;	
+		ming["age"];	//必须是字符串，可以拼接,更灵活
+		用.会默认调用ming["age"]，即ming.age-->(默认调用)ming["age"];
+		如果有字符串拼接，就用[]
+		例如:
+			var ming {
+				book1:java
+				book2:web
+			}
+		ming["book"+1];		//java
+	//添加一个属性:
+		ming.like="java";
+	//删除一个属性:删除性别
+		delete ming.sex;
+	访问一个没有的对象属性:不会报错会返回undefined;
+遍历一个对象:
+		var obj={
+			name:"ming";
+			age:"21";
+			sex:"name";
+		}
+		for(var prop in obj){
+			console.log(prop+" "+typeof(prop));//遍历对象的方法
+			console.log(obj[prop]);//遍历对象的名字;
+			console.log(obj.prop);//obj.prop-->obj["prop"],prop不是变量。
+		}
+
+{}=={}	//false,应用值比较的是地址值。
+2.
+	var  ming={
+		name:"ming";
+		sex;"男"
+		__proto__:{
+			LastName:"Zhu"
+		}
+	}	
+	
+	for( var prop in ming){
+		if(obj.hasOwnProperty(prop)){	//去处原型里面的属性：
+			console.log(prop+" "+ming[prop]);	//一定要用[]
+		}
+	}
+	//原型链上的属性也会遍历，是系统设置就不会打印，可以用if(obj.hasOwnProperty(prop))去保证不拿原型上的属性。
+	in 判端属性是否在对象里面可以访问:(包括原型里面的);	
+对象创建的方法
+	//1. var obj={ 属性名:"值"} plainObject 对象字面量/对象直接量
+	//2. 构造函数
+		1)系统自带的构造函数 Object(); new Object();
+			var obj = new Object(); //系统自带函数对象
+		2)自定义构造函数;(为了便于区别，构造函数遵守大驼峰命名规则，普通函数遵守小驼峰命名规则)
+			function Person(){ this.country="china";}   var ming= new Person();
+
+构造函数内部原理:(不太完美的解释),一定要有new才可以
+	1.在函数体最前面隐式的加上了 var this={}
+	2.执行this.xxx=xxx;
+	3.隐式返回this对像	
+    例如:
+	系统要有new
+	function Person(name,sex){
+		//隐式的加上 var this={};
+		this.name=name;
+		this.sex=sex;
+			//return {};//会覆盖掉隐式对象this,一定要是返回对象才可以覆盖，返回123，是不会覆盖的。
+		//隐式return this;
+	}
+
+A instanceof B
+instanceof 判断A的原型上有没有B的原型。
+	注意:
+		var obj = {};	//声明一个对象
+			obj instanceof Object; //true;
+			obj instanceof Array;  //false;
+		var obj=[];
+			obj instanceof Array;  //true;	
+			obj instanceof Object; //true;
+区分{} 和数组
+	var a={};//[];
+	1. a.constructor();
+	2.a instanceof Array;
+	3.Object.propotype.toString.call([]);
+1和2 用<ifream>子域里面的数组不能判断。即 子域里面的[] instanceof Array 为false。
+
+
+注意:用console.dir(object);	//用该方法可以打印一个对象的所有属性。

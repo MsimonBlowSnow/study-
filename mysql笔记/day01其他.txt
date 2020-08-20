@@ -1,0 +1,8 @@
+1.重启数据库
+	service mysqld start|stop|restart;重启数据库
+2.数据库清屏
+	system clear
+3.在mysql中使用 tee [目录] 可以保存sql语句
+	tee /home/1.sql;
+4.在mysql5.7中password的字段被改为了authentication_string
+5.mysqladmin 可以在普通用户的模式下获取root的权限

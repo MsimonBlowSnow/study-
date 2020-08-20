@@ -1,0 +1,22 @@
+ES6引入了块级作用域，明确允许在块级作用域之中声明函数。
+
+	// ES6严格模式
+	'use strict';
+	if (true) {
+ 		 function f() {}
+	}
+	// 不报错
+并且ES6规定，块级作用域之中，函数声明语句的行为类似于let，在块级作用域之外不可引用。
+
+function f() {console.log('I am outside!');}
+(function (){
+	if(false){
+		function f(){
+			console.log('I am inside!');
+		}
+	}
+	f();	
+}());
+
+上面的代码es6运行为"I am outside"//块级作用域
+es5运行为"I am inside"；//函数声明提升。

@@ -1,0 +1,51 @@
+事件处理模型:
+	事件冒泡:结构上(非视觉)嵌套关系的元素，会存在事件冒泡的功能，
+即同一事件，自子元素冒泡向父元素。（自顶向上）
+	事件捕获:结构上(非视觉)嵌套关系的元素，会存在事件捕获的功能，
+即同一事件，自父元素冒泡向子元素。（自顶向上）	,只有google实现了，ie没有捕获事件。
+	触发顺序：先捕获，后冒泡。
+
+注意:一个事件处理模型只能执行一种模型。
+	addEventListener();中第三个参数为true就为捕获，false为冒泡
+	ie只有冒泡，没有捕获
+focus ,blur,change, submit, reset, select 等事件不冒泡。
+事件捕获冒泡是针对父元素的
+
+例题:
+	<div id="01">
+	  <div id="02">
+	    <div id="03"></div>
+	  </div>
+	</div>
+		var div1=document.getElementById('01');
+		var div2=document.getElementById('02');	
+		var div3=document.getElementById('03');
+	//添加捕获事件		
+	div1.addEventListener('click',function(){
+		console.log(01+"捕获");
+	},true);
+	div2.addEventListener('click',function(){
+		console.log(02+"捕获");
+	},true);	
+
+	//添加冒泡事件
+	div3.addEventListener('click',function(){
+		console.log(03+"冒泡");
+	},false);
+	div3.addEventListener('click',function(){
+		console.log(03+"捕获");
+	},true);
+	div2.addEventListener('click',function(){
+		console.log(02+"冒泡");
+	},false);
+	div1.addEventListener('click',function(){
+		console.log(01+"冒泡");
+	},false);
+
+	点击div03控制台输出
+		01捕获 02捕获 03冒泡 03捕获 02冒泡 01冒泡
+	解析:其中只有03冒泡和03捕获是本身，执行的是点击事件，不遵守先捕获后冒泡，
+		其他的都是父元素遵循该规则。
+
+注意元素不绑定事件也可以冒泡。
+

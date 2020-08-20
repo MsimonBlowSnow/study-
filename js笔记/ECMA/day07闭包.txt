@@ -1,0 +1,74 @@
+闭包： 把函数的AO保存下来，在函数外部调用
+
+例题:	
+	function a(){
+		var num=100;
+		function b(){
+			num++; 
+			console.log(num);
+		}
+		return b;
+	}
+	
+	var demo=a();
+	demo();		//a=101
+	demo();		//b=102
+解析:
+	var demo=a();这一步创建了a的作用域链有依次是a的ao，go
+	其中a的ao中有b的ao的指针，并销毁a的ao;
+	demo是b的作用域链包括b的ao，a的ao 和go；
+
+例题二:
+
+	function test(){
+		var arr=[];
+		for (i=0;i<10;i++){
+			arr[i]=function(){
+				document.write(i+" ");
+			}	
+		}
+		return arr;
+	}
+	
+	var myArr=test();
+	for(j=0;j<10;j++){
+		myArr[j];     //打印十个10
+	}
+
+解析:
+myArr保存的ao是函数test()的ao,不过在第一次执行test()时i就变为10; myArr和test形成闭包;
+ 	如果是：
+		function test(){
+			var arr=[];
+			for(var i=0;i<10;i++){
+				(function(j){
+					arr[j]=function(){
+						document.write(j+" ");
+					}		
+				}(j));
+			}
+			return arr;
+		}
+	var myarr=test();
+		for(var j=0;j<10;j++){
+			myArr[j]();	//0 1 2 3 4 5 6 7 8 9
+		}
+
+
+闭包坏处:当函数被保存到外部时，将会生成闭包。比包会导致原有的作用域链不释放,造成了内存泄漏。
+
+
+私有化变量:
+	function Ming(){
+		var money=100;
+		this.sayMoney=function() {
+			console.log("money:"+money);
+		}
+	}
+	
+	var ming=new Ming();
+	console.log(ming.money);	//undefined
+	ming.sayMoney();		//money=Money;
+相当于money属性私有化了;
+this.sayMoney与Ming相成立闭包了;
+	

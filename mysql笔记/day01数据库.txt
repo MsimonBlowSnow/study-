@@ -1,0 +1,17 @@
+1.登录命令:
+	mysql -uroot -p[密码] //登录数据库
+2.查询数据库:
+	show databases;
+3.操作数据库:
+	use [数据库名]
+4.创建数据库
+	create database [数据库名] (字符集) 
+	例如: create database mingTest charset utf8; //创建mingTest数据库
+	
+注意:数据库不能改名。
+使用 create database if not exists runoob default charset utf8 COLLATE utf8_general_ci;
+	创建数据库，如果存在就不创建，不存在就创建一个utf8的数据库
+
+5. 删除数据库:
+	1.drop database [数据名];
+	2.在终端中输入mysqladmin -uroot -p drop runoob，回车并输入root的密码

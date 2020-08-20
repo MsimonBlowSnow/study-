@@ -1,0 +1,31 @@
+立即执行函数
+	普通函数:定义一个普通函数不执行或者好久以后执行一次会浪费内存空间，该函数一直不释放
+
+立即执行函数格式
+
+	(function (){
+		函数代码
+	}());      //第一种，建议使用
+
+	(function (){})();   //第二种
+
+	2.只有表达式才能被执行,被执行符号执行了的表达式名字会被忽略。
+	var test=function(){
+		alert(a);
+	}();    //被执行了，打印a，不过test就不会是函数了，而是undefined,该函数相当于立即执行函数。
+
+	+function test(){
+		alert()
+	}();	//函数会被执行，不过test就是undefined，不代表函数，相当于立即执行函数。	
+
+
+	function test(){
+		alert(a);
+	}();	//不会被执行
+
+例题:
+	var x=1;
+	if(function f(){}){	//表达式+函数定义变成立即执行函数，值为ture
+		x+=typeof f;	//x+undefined;
+	}
+	console.log(x);		//1undefined

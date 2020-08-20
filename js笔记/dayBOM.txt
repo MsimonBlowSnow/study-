@@ -1,0 +1,52 @@
+1.使用BOM对象:
+	window 对象的BOM是js窗口的接口，也是js全局对象，在全局里面定义的属性和方法都是window上的。
+
+浏览器对象的介绍:
+	window:	客户端js中的顶层对象，有<body>和<frameset>标签出现时，window对象就会自动创建。
+	navigator: 包括客户端有关的浏览器信息。
+	screen: 包括客户端的显示信息。
+	history:包括浏览器访问过的url信息。
+	location : 包括当前网页文档的url信息
+	document : 包含整个html文档，可被用来访问文档内容，及其所有页面元素。
+
+window (全局作用域)
+	1.通过var的全局变量不能用delete删除该属性，而window.a可以通过delete删除。
+	2.通过window可以判断一个变量是否存在
+		alert(a);		//报错
+		alert(window.a);	//define
+	3.window中有三个人机交互的方法
+		1.alert();	//弹出一个对话框。
+		2.confirm();	//简单的提示对话框，包括两个按钮，“确定”和 '取消'确定返回true，取消返回false。
+		3.prompt();	//弹出一个可以接收用户数据的输入框，并把用户数据返回，prompt();包括一个可选参数，即提示信息，没写就会弹出一个没有提示信息的输入框。
+
+这三个方法可以通过重写来改变样式。vscode里面有改变alert的代码
+	注意:这三方法执行都会导致js停止执行，只有输入了信息后才恢复，不过对于有些浏览器不会停止执行，如unix里面的浏览器。
+
+
+打开和关闭浏览器窗口:
+	window.open(URL,name,features,replace)
+	url :打开窗口的显示文档URL，为空就不显示文档
+	name :窗口名，如果创建窗口名已经创建了一个窗口，就会对窗口进行引用，不会在创建一个，此时，features没有用了。
+	features:声明新窗口的特性。
+	replace：归定浏览器转载的url是在浏览器历史中创建一个新条目，还是代替浏览器历史中的当前条目。
+
+location对象:
+	location对象的使用
+		location.href ;	//获取浏览器中的地址
+	常用方法:
+		loaction.assgin(url);	//委派，和href一样,也可以跳转
+		location.replcae(url);	//不记录历史跳转，
+		location.reload(isture();	//相当于F5,ture强制从服务器获取，false重本地获取页面，F5相当于f5相当于false  ctrl+F5相当于true
+url的组成:
+	bash: 锚点
+	pathname: 页面
+	port :端口号
+	search :?后面的数据查询内容
+	hostname :主机名. 				
+
+hostory:
+	hostory.go(1)||hostory.forward();	//前进
+	hostory.go(-1)||hostory.foward();	//后退
+
+navinetor.userAgent对象:获取用户的系统版本和浏览器版本
+	

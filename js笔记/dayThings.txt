@@ -1,0 +1,63 @@
+事件的绑定:
+	1.在标签内写
+	2.div.onclick = function (){}	//缺点只能绑定一个。this指向document本身
+	3.div.addEventListener('click',function (){
+		console.log('a');
+	}，false);	//ie9以下不兼容,可以为一个事件绑定多个不同的处理函数。false为冒泡事件，true为捕获只对父元素。
+	注意:不写on,可以绑定多个处理函数，按照绑定顺序执行
+	，同一个函数绑定多次值执行一次。
+	例如:
+	var test = function (){
+		console.log('a');
+	}
+	div.addEventListener('click',test,false);
+	div.addEventListener('click',test,false);//只能自行一次。
+	div.addEventListener();	//ie9以下不兼容
+	//this指向是dom元素本身。
+	4.adiv.attachEvent('on'+事件类型，function(){});	//ie独有，this指向window.
+		一个事件同样可以绑定多个处理程序。
+	div.attachEvent('onclick',function(){
+		console.log('a');
+	});
+
+
+例题:
+	一个页面里面有四个li标签，分别给li加点击事件，并返回日li的位置索引
+ var lis = document.getElementsByTagName('li');
+                for( var i = 0; i <lis.length; i ++){
+                        //用立即执行函数防止闭包
+                        (function (i){
+                                lis[i].onclick = function (){
+                                console.log(++i);
+                                }
+                            })(i);    
+                        }
+        	}
+
+给document对象添加基本当处理函数兼容所有浏览器
+	felem.addEventListenerunction add(elem,type,handle){
+		if(elem.addEventListener){
+			elem.addEventListener(type,handle,false);
+		}else if(elem.attachEvent){
+			elem.attachEvent('on'+type,function(){
+				handle.call(elem);
+			})
+		}else{
+			elem['on'+type] = handle;
+		}
+	}
+	
+解除事件:
+	1.onclick 的方式绑定的用div.onclick = null;
+		div.onclick = function(){	
+			console.log(i);
+			this.onclick = null;
+		}
+	2.ele.removeEventListener(type,fn,false);	//解除addEventListener,参数要与addEventListtener一致。注意fn的一直，用匿名处理函数不能解除，因为不是一个函数。
+	3.ele.detachEvent('on',type,fn);参数要一致。	
+
+onunload	//卸载时执行
+	window.onunload = funtion(){
+		alert("mmp");	//window被卸载了，不能执行。
+	}
+	

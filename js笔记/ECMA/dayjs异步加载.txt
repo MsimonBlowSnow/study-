@@ -1,0 +1,116 @@
+页面加载:
+	先识别你的html标便，并加载domtree上.顶点是document，绘制domtree讲究，深度优先原则。
+	先html ->head->title->title。	//深度优先
+
+<img src="XXX.jpg">
+	dom节点的解析:解析完成生成domTree,不过里面的资源可能没有加载完成，
+		所以dom树解析完成，并不代表页面加载完成。
+	dom解析完成，domtree生成后，等csstree生成，csstree也是深度优先。
+	domtree和csstree解析完成，两者会拼成一个新的树，
+		即 domtree +csstree = randerTree。
+	randerTree形成好了，会开始绘制页面。
+	
+	如果反复用js添加会节点导致domtree的该变，然后重新构建randerTree。即reflow 重排，效率非常慢
+	reflow 重排的触发有，dom节点的删除，添加，dom结点的宽高变化，位置变化，display->none 转化为block。offsetwidth offsetleft,重新构建randerTree
+	还有一个repaint 重绘 影响比较小，不会影响后续元素，影响效率比较小，可以接受。
+	
+
+一般情况下js是同步加载的。
+异步加载js:
+	js加载的缺点:加载工具方法没有必要阻塞文档，不过js加载回影响页面的效率，一旦网速不好，那么整个网站将等待js加载而不进行后续渲染等工作。
+	有些工具方法需要按需加载，用到在加载，不用不加载。
+
+js异步加载三种方法:
+	1.defer异步加载，但是要等到dom文档全部解析完成才会被执行，也可以将代码写到内部。
+		<script type = "text/javascript" src="tools.js" defer = "defer"></script>
+		<script type = "text/javascript" defer = "defer">
+			var  a=1;
+		</script>
+		早期的浏览器两种都是异步加载，都可以，现在子能外部脚步。
+	注意是解析完毕，即randertree形成。就会执行。
+	2.async异步加载，加载完就执行，async只能加载外部脚本，不能把js写在script标签里面。ie9不支持
+		只能写外部脚本
+			<script type = "text/javascript" src= "tools.js" aysnc="aysnc"></script>
+	
+	defer和aysnc
+	执行时都不会阻塞页面，不过defer可以把代码写在里面，aysnc只能也外部引用。
+
+	3.创建script,插入到Dom中，加载完毕后callback。兼容性强，功能强大。
+	兼容性异步加载js。
+		
+	<script>
+          	//前三行只会加载，不会执行。
+          	var script = document.createElement("script");
+          	script.type = "text/javascript";
+        	//异步加载  	
+		script.src = "tools.js";
+          	//会执行。
+          	document.head.appendChild(script);
+		//test()是tools.js里面的方法	
+		test();		//会报错，tools.js没有加载完。
+	</script>
+
+	改为	
+	<script>
+          		//前三行只会加载，不会执行。
+          		var script = document.createElement("script");
+          		script.type = "text/javascript";
+        		//异步加载  	
+			script.src = "tools.js";
+          		//会执行。
+          		document.head.appendChild(script);
+			//test()是tools.js里面的方法	
+		window.onload = function (){
+			test();		//不会报错，tools.js加载完在执行test()。
+		}
+	</script>	//兼容性好，ie不兼容，ie没有load事件。
+
+	ie有一个状态码，script.readyState = "loaded"加载完成。
+script.onreadystatechange = function (){//当loading 变成onloaded会触发。
+	if(script.readyState == "complete" || script.readyState == "load"){
+			test();	
+	}
+}
+		
+
+
+
+异步加载js兼容所有的浏览器的函数封装
+
+function loadScript(url,test){
+    var script = document.createElement("script");
+    script.type = "text/javascript";     
+    if(script.readyState){ //ie
+        script.onreadystatechange = function (){//当加载完成会触发
+	 if(script.readyState == "complete" || script.readyState == "loaded"){
+		test();	
+	 }
+        } 
+     }else{
+ 	window.onload = function (){
+		test();	//不会报错，tools.js加载完在执行test()。
+	}
+     }
+    //异步加载
+    script.src = url;	//保证事件已经绑定，防止加载过快。
+    document.head.appendChild(script);  
+900e}
+
+	调用loadScript ('demo.js', function (){test();)
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

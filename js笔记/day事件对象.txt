@@ -1,0 +1,44 @@
+事件对象:
+	event 除了IE，都可以
+	 window.event 用于IE
+	div.onclick = function(e){
+		var event = e || window.event
+		console.log(event);	//事件对象
+	}
+事件源对象:事件对象上面的一个属性。
+	是发生事件的元素(不经过冒泡和捕获)
+	event.target 火狐只用这个,获取点击的真正对象。
+	event.srcElement Ie只有这个
+	chrome都有。
+
+事件源对象的利用:
+	给ul里面的li加上点击属性，并显示li里面的内容
+	
+	var ul = document.getElementByTagName('ul')[0];
+	ul.onclick = function (e){
+		//兼容浏览器，获取事件对象
+		var event = e || window.event;
+		var target = event.target || event.srcElement;
+		console.log(target.innerText);
+	}
+	上面的利用了事件委托的机制
+
+事件委托
+	利用事件冒泡，和事件源对象进行处理
+	优点:
+		1.性能 不需要循环所用的元素一个个绑定事件
+		2.灵活 当有新的子元素时不需要重新绑定事件。
+e.eventPhase	//事件属性对象 1.捕获阶段 2.目标阶段 3.冒泡阶段。
+	例如:e.onclick = function (e){
+		console.log(e.eventPhase);	//2	因为没有捕获或者冒泡
+	    }
+
+事件对象的其他属性:
+	1.e.type 	//事件的种类
+		console.log(e.type); //click mouseover mouseout 等等
+	2.e.clientX/clientY	//鼠标距离可视窗口的距离(左上).
+		注意是可视窗口的坐标(如果滚动条滚动了，还点击那个变了之后的		    元素节点，就会变化)。（没有兼容性问题）
+	3.e.pageX/pageY(存在兼容性问题)	//鼠标相对于document文档的距离,
+		和clientX/clientY正好相反，滚动滚动条对pageX/pageY没有影响
+	要通过scrollleft/scrolltop,pageXoffset来实现兼容。
+	具体看笔记dayAttribute	

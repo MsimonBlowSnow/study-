@@ -1,0 +1,31 @@
+group by 的使用
+	group by(列名)，	//使用这个可以把列中相同的记录分为一个组。
+1.count(*)
+	select count(*) from tablename;//计算有多少条记录
+	select count(id) from tablename;//计算id不为空的记录有多少条。
+2.对数据进行分组统计
+	select username count(*) from tablename group by (username);
+		对username进行分组,并算出相同username的个数
+	
+	计算每个班级的平均分
+	select classid,avg(score) from score group by (classid);
+注意: group by运行在where之后，having之前，返回的是一个数据组
+	select name,count(*) from study group by (id);
+	上面的sql语句会报错,select 在group by之后，经过group by 会产生一个虚拟表，其中没有name字段，具体原因看:day03mysql语句执行顺序
+3.having
+HAVING语句通常与GROUP BY语句联合使用，用来过滤由GROUP BY语句返回的记录集。
+HAVING语句的存在弥补了WHERE关键字不能与聚合函数联合使用的不足	
+
+
+注意:where和 group by和having的执行顺序，where >group by >having
+	group by 是在where的返回的结果之后进行分组，having是在group by的返回的结果上进行分组,针对已经分组的数据进行删选
+	where 不能使用聚合函数,聚合函数运行在where之后分组的。
+	where之后的都是内存操作，where将数据拿到内存里面。
+
+	例如:(having)查出每个班上的平均成绩,并显示平均分数大于60的班级
+select class_id,avg(score) from score_table group by(class_id) having avg(score)>60;
+	(where) 查询每个班及格成绩的平均分数
+	select class_id,avg(score) from score_table where score>60 group by(class_id); 
+
+
+注意:group by 在5.7.5以上设置only_full_group_by,该设置约束了查询条件必询为聚合的列。使用下面语句解除约set sql_mode ='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';束

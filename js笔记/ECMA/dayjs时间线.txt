@@ -1,0 +1,27 @@
+js加载时间线:
+	1.创建Document对象，开始解析web页面。解析html元素和他们的文本内容后添加element对象和text节点到文档中.doucment.readyState = 'loading'.
+	2.遇到link外部css,创建线程，并解析文档。
+	3.遇到script外部js并且没有设置async,defer，浏览器加载，并阻塞，等待js加载完成，并执行该脚本，才会继续解析文档。
+	4.遇到script外部js，并且设置aysnc,defer,浏览器创建线程加载，并继续解析文档。对于aysnc属性的脚本，脚本加载完成立即执行。(禁止使用document.write()).
+	5.遇到img等，先正常解析dom结构，然后浏览器异步加载src，并继续解析文档
+	6.当文档解析完成，document.readState = 'interactive'.
+	7.文档解析完成后，所有设置有defer的脚本会按照顺序执行。（注意与async不同，但是同样禁止使用document.write())
+	8.document对象触发DOMContentLoaded事件，这也标志着程序执行从同步脚本执行阶段变为事件驱动阶段。
+	9.当所有async的脚本加载完成并执行后，img等加载完成后，document.readyState = ‘complete’,window对象触发事件。
+	10.从此，以异步相应的方式处理用户输入，网络事件等。
+
+
+具体看web>js加载。
+
+
+
+代码块:
+	在用到多个script标签下，虽然多个标签是一个作用域下的即（window）不过如果不用defer和async时会按照正常顺序执行，即先解析第一个script，并执行，然后时第二个...
+	js是按照块执行的，不同的块之间可以共享数据，不过因为按块执行，所以向下面的代码就有错误了:
+		<script>
+			hi();	//没有定义
+		</script>
+	
+		<script>
+			function hi(){};	//定义在执行之后
+		</script>

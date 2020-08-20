@@ -1,0 +1,16 @@
+day1 js历史特点,主流浏览器模型
+    历史:
+       js 包括 ecmascript dom bom 三类
+    特点:
+      单线程,解释性语言，弱类型语言
+      js:解释性语言(解释性语言有跨平台性,读取一句执行一句，慢)
+      c,c++:编译性语言(不具有跨平台性,先编译文件,产生一个新文件，在执行，快)
+      java 通过javac编译，在通过jvm解释，所以也有跨平台性。
+主流浏览器:	内核						使用同一种内核
+Ie	        Trident						360，搜狗.....
+chrome		以前webkit/现在blink
+Safari		webkit
+Opera		以前Presto/后来webkit/现在Blink
+Friefox		Gecko
+
+   

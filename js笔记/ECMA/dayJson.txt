@@ -1,0 +1,17 @@
+json:
+	json是一种传输数据的格式(以对象为模板，本质上就是对象，但是用途
+	有区别，对象是本地，json是用来传输的。)
+	
+	JSON.parse(); string --> json
+	JSON.stringify(); json -->string
+	{
+		"name": "ming",
+		"age" : 10
+	}
+	json的属性必须要用""括起来
+
+
+前后端传输数据:
+	前后端传输的是字符串,
+	JSON.parse();可以把后端穿过来到字符串变为json形式
+	JSON.stringify() 可以把JSON对象-->变为字符串模式，传给后端。

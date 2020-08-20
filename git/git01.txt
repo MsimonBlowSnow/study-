@@ -1,0 +1,24 @@
+1.使用在指定项目的目录下使用git init 可以初始化git 仓库。
+	在 web/里面 用终端在web/目录下使用git init 就会创建一个保存web/的文件。
+
+2.git config --global配置个人信息
+使用git config --global user.name "xiaoming"，可以设置自己的名字
+使用git config --global user.email "";可以配置自己的邮箱。
+
+3.把自己的项目放入仓库里面
+	1.git add ./readme.md //把readme文件放入大门口
+	2.git commit -m "详细信息" //把readme.md件放入仓库，加-m表示信息。
+注意:使用add相当于把文件加入了缓存区，而使用commit则表示添加1如仓库保存。
+一般保存成功就会有提示。
+
+4.git status 查看是否进行2中第一步的add命令.
+未跟踪的文件表示没有保存到仓库(没使用commit)，也没有添加到缓存区(没使用add)
+要提交的文件，经过了add,不过没有commit。
+
+5.git add ./ 一次性把文件放入缓存里面
+
+6.git commit -all 把我们修改的代码一次性保存,仓库里必须有副本
+
+7.git log //查看保存的文件记录的信息。
+	git log --oneline //看到简介版的日志 
+

@@ -1,0 +1,9 @@
+文档的加载:
+	html 解析形成 domtree,顶点时document
+	css 解析形成 csstree，
+	csstree + domtree = rendertree 形成渲染树。
+有一<link rel="stylesheet" href="style.css">
+先解析完，放在domtree上，同时开启一个线程去异步加载style.css。
+	如果用window.onload，则里面的代码就必须等待下载完成1.css,在执行，效率慢
+	如果把js放在<body></body>标签之后，执行就不必等待加载完成数据了。
+

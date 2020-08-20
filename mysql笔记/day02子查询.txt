@@ -1,0 +1,63 @@
+1.子查询
+	注意: 
+	查询主体决定主查询，条件决定子查询。
+	子查询的概念:
+		子查询是一种常用的计算机语言select-sql语言中的嵌套模块，当一个查询是另一个查询的条件时，称为子查询.
+	在select中 嵌套在另一个select里面,确定的用户获取的数据目标(数据源),已经要具体得到的字段信息。
+	1.子查询是嵌入到主查寻中的
+	2.子查询是辅助主查旬的
+	3.子查询可以独立存在
+安功能分类:
+	标量子查询:子查询返回的结构是一个数据(一行一列)
+	列子查询:子查询返回的结果是一列(一列多行)
+	行子查询:子查询返回的结构是一行(一行多列)
+	表子查询:子查询返回的结构是多行多列
+	Exists查询:子查询返回的结果是1或者0
+按位置分:
+	where子查询:子查询出现在where语句中
+	from子查询:子查荀出现在from语句中(作为数据源)
+
+标量子查询(子查询一行一列):
+	基本语法:
+	select * from 数据源 where 条件判断 =/<>(select 字段名 from 数据源 where 条件判断);	//返回的结构为(一行一列)
+	例如: 查询id为ming的同学的班级
+	select * from my_class where class_id = (select class_id from my_student where sid= 'ming');
+	
+
+列子查询:(子查询返回一列多行)
+	主查询 where 条件 in (列子查询);
+	例如: 查询以及有学生的班级的班级名子
+select  class_name from my_class where class_id in
+	(select class_id from my_student);
+
+行子查询:(子查询返回的是一行多列)
+	行元素:字段元素是指一个字段对应的值，行元素对应的是多个字段,多个字段组合起来就是作为一个元素参与运算,把这中情况叫做行元素。
+	基本语法:
+		主查询 where 条件[(构造一个行元素)] = (行子查询);
+	例如:
+		获取班级上最大年龄,且身高最高的学生
+	select * from my_student where (stud_age,stud_height) = (select max(stud_age),max(stud_name) from my_student);
+
+	其中(stud_age,stud_height);	//构造行元属
+	这个行元素要与行子查询的内容一至。
+select * from my_student where stud_name=max(stud_height),stud_name=max(age);
+	不可以:1.where执行在分组之前，所以不能使用聚合函数
+	select * from my_student having stud_name=max(stud_height),stud_name=max(stud_age);
+	having 表示，系统默认调用group by，返回的是一组数据。
+
+表子查询:
+	子查询返回的结果是多行多列,表子查询和行子查询非常类似，只是行子查询需要构造行原属,行子查询没有.
+	行子查询是用于where条件判断，where子查询
+	表子查询是用与from数据源，from子查询
+	
+	语法:
+		select 字段表 from (表子查询) as table [where] [group by] [having] [limit];
+		注意: from 后面必须根表名;使用as table 作为表的别名。
+	获取每个班上最高身高的学生(一个)
+		错误的实例:
+	select * from my_student group by class_id having stu_height = max(stu_height);
+	通过group by 只会返回一个数据(错误)
+	正确的思路:
+		1.将每个班上最高的学生排在前面:order by
+		2.再针对结果进行group by ： 保留一个。
+	select * from (select * from my_student order by stu_height desc ) group by class_id;

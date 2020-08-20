@@ -1,0 +1,59 @@
+1.查看页面的滚动条滚动距离:
+	window.pageXOffset/pageYOffset	//横向滚动条window.pageXOffset,纵向滚动条window.pageYOffset滚动调的滚动距离,(ie9以上的能用,ie8和ie8以下不能用);
+	ie8与ie8以下的方法
+	1.	document.body.scrollLeft;	//横向滚动条的距离
+		document.body.scrollTop;	//纵向滚动条的距离
+	2.	document.documentElement.scrollTop;	//纵向滚动条的距离
+		document.documentElement.scrollLeft;	//横向滚动条的距离
+	//ie8与ie8以下的浏览器
+	//document.body.scrollLeft/Top;
+	//document.documentElement.scrollLeft/Top
+	在ie8和ie8以下不确定那个有用，不过一个方法有用，另一个就是0,所以一般用两者相加。
+		document.documentElement.scrollLeft+document.body.scrollLeft;	//获取横向滚动条的距离。
+		document.documentElement.scrollTop+document.body.scrllTop;	//获取纵向滚动条的距离。
+
+封装一个方法有较好的兼容性的获取滚动条的距离
+	function getscrollXY() {
+		if(window.pageXOffset){
+			return {
+				x : window.pageXOffset,
+				y : window.pageYOffset
+			};
+		}else{	
+			return {
+				x : document.body.scrollLeft + document.documentElement.srcollLeft,
+				y : document.body.scrollTop + document.documentElement.srcollTop
+			};
+			
+		}
+	}	`	
+
+查看视口的尺寸:
+	window.innerWidth/innerHeight	//IE8及IE8以下不兼容
+	document.documentElement.clientWidth/clientHeight	//标准模式下任何浏览器都兼容
+	document.body.clientWidth/clientHeight		//适用于怪异模式下的浏览器.
+	
+	解释:浏览器有两种模式：标最模式，和怪异(混杂)模式。	
+		标最模式:写一个dtd
+		怪异(混杂)模式:	去掉<!DOCTYPE html>；。	
+
+查看元素的几何尺寸:
+	domElement.getBoundingClientRect();	//任何dom元都可以调用。注意返回的结果不是实时，当div改变，他的值不变。
+	包含padding 不包含margin。
+	如：div.getBoundingClientRect();	//返回一个对象，bottom: right: left: heiight:(左上右下)，height:高 width: 100,
+	
+查看元素的尺寸:
+	dom.offsetWidth, dom.offsetHeight;	//查看一个元素的高宽,任何dom都可以调用。包含padding,不包含margin,
+	
+	var width = div.offsetWidth;	//元素的宽
+	var height = div.offsetHeight;	//元素的高。
+查看元素的位置:
+
+	dom.offsetLeft,dom.offsetTop;	//对于无定位的父级的元素，返回的是相对于文档的坐标，对于有定位的父级元素，返回的是相对于最近的有定位的父级的坐标。(不包括margin)
+
+相对于窗口的距离 e.clientX ,e.clientY	//事件对象
+鼠标相对于文档的坐标: e.pageX e.pageY 	//有兼容性问题，具体处理看
+	pageXAndpageY，
+鼠标相对与元素的位置
+	用相鼠标对于文档位置-元素相对于文档位置
+	window.pageXoffset+elem.clientX-div.offsetLeft。

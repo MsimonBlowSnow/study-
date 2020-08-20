@@ -1,0 +1,41 @@
+ 类数组
+	好处:可以当作数组用，也可以当作对象用。
+         function test(){
+                  console.log(arguments);//arguments  是一个类数组。
+           }
+           类数组:
+           var obj={
+                   "0":"a",
+                   "1":"b",
+                    "2":"c",
+                   "length":3,
+                   "push":Array.prototype.push;
+           }
+	obj.push('d');
+	console.log(obj);	//Object{0:"a",1:"b",2:"c",3:"d","length":4};length自动加一
+类数组的组成部分:
+	1.属性为索引，即数字
+	2.必须有length
+	3.最好加上push
+	4.如果加入splice方法，"splice":Array.prototype.splice,sonsole.log(obj);	//["a","b","c"];
+	Array.prototype.push = function (target){
+		this[this.length] = target;
+		this.length++;
+	}
+例题:
+	var obj = {
+		"2":"a",
+		"3":"d",
+		"length":2,
+		"push":Array.prototype.push
+	}
+	obj.push("c");
+	obj.psuh("d");
+obj是什么样?	//观察push方法内部原理，看上面20行。
+	obj={
+		"2":"c",
+		"3":"d",
+		"length":4
+		"push":Array.prototype.push
+	}
+	

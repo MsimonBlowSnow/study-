@@ -1,0 +1,77 @@
+日期对象,系统提供:
+	var date = new Date();	//记录了创建的时间。
+计算机纪元时间:	1970年1月1日。
+
+Date对象的方法:
+	Date();		//返回一个Date的对象,返回当前时间和日期。
+	getDate();	//从Date对象返回一个月中的某一天(1-31)。
+	getDay();	//从Date对象返回周中的某一天(0-6)(日-六)。
+	getMonth();	//从一个对象返回月份(0-11)(1月-12月)。
+	getFullYear();	//从对象里面返回四位数字年份。
+	getYear();	//从对象里面返回距离一个1900年的数字。
+	getHours();	//返回Date对象的小时(0-23)
+	getMinutes()	//返回Date对象的分钟(0-59)
+	getSeconds()	//返回Date对象的秒速(0-59)
+	getMilliseconds()	//返回Date对象的毫秒(0-999)
+	getTime()		//返回Date()1970年1月1日至今的毫秒数
+	getTimezoneOffset()	//返回本地时间与格林威治标准时间的分钟差
+	getUTCDate()		//根据世界时从Date对象返回月中的一天(1-31)
+	
+set方法:
+	setDate();	//设置Date对象中月中的某一天
+	setMonth();	//设置Date对象中的月份
+	setFullyear();	//设置Date对象中的年份
+	setYear();	//设置对象里面的时间年距离一个1900年的数字。
+	setHours();	//设置对象里面的小时
+	setMinutes();	//设置对象里面的分种数
+	setSeconds();	//设置对象里面的秒
+	setMillsecond();//设置Date对象中的毫秒数。
+	setTime();	//设置对象Date时间。
+
+定时期:
+	1.setInterval();		//参数第一个为一个函数，第二个为一个整数参数。每隔多少毫秒执行这个函数。window上的方法，返回一个数字，唯一标识该定时器
+	setInterval(function(){
+		alert("mmp");
+	},1000);	//每隔1000毫秒执行函数。
+
+	例:
+		var  time = 1000;
+		setInterval(function(){},time);
+		time = 2000;
+		//修改time值不会影响定时器,还是1000秒执行。
+		
+		setInterval();	//有点不准，由于线程执行问题等等。
+	
+	2.clearInterval(timer);	//timer是setTnterval()返回的标识，表示一个定时器的编号。
+	例:	当i = 10时清除setInterval()
+		var i = 0;
+		var timer = setInterval(
+			function(){
+				if(i == 10){
+					clearInterval(timer);
+				}
+				i++;
+				console.log(100)
+			},1000);
+	3.setTimeout();		//一段时间后执行函数，不循环
+		setTimeout(function() {
+			console.log('a');
+		},1000);	//1秒后执行该函数。
+
+	4.clearTimerout();	//timer是setTimeout();的一个唯一标识。
+	
+		var timer = 
+		setTimeout(function() {
+			console.log('a');
+		},1000);	//1秒后执行该函数。
+
+
+注意: 全局对象window上的方法,内部函数this指向window
+	注意:setInterval("string",1000);	//string为字符串，把string当代码执行。
+
+
+
+
+
+
+	

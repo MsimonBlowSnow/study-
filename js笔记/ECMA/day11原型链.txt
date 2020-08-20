@@ -1,0 +1,106 @@
+原型链:
+	解释对象有一个作用域链如
+	Grand.prototype.name="ming"
+	
+	function Grand(){}
+	
+	var grand =new Grand();
+	
+	Father.prototype=grand();
+	
+	function Father(){
+		this.money={
+			name:100;
+		};
+		this.money10=100;
+	}
+	
+	father= new Father()
+	
+	Son.prototype=father;
+	
+	function Son(){}
+	
+	var son=new Son();
+
+	sonsole.log(son.name); //"ming" 这就是一个原性链 son->father->grand;
+	
+object.prototype 是所有的原型链终端。
+
+原型链属性的增加:
+	console.log(son.name)//访问father的name
+	son.name=100;	//不会改变father里面的name，而是在son上加上一个name
+	son.name.ood="mmp";	//当son没有name属性时就会在father上面加上一个ood属性，并赋值为"mmp";当son有name属性时，father不会变。
+
+	son.money10++;	//father里面的money并没有该，son加上一个money属性，并赋值为101；
+
+
+
+
+例题2:
+	Person.prototype={
+		this.name:"a";
+		sayname:function (){
+			console.log(this.name);
+		}
+	}
+	function Person(){
+		this.name="b";
+	}
+	var person=new person();
+	
+	person.sayname();	//b,
+	Person.sayname();	//a
+
+例题3:
+	Person.prototype={
+		height:100;	
+	}
+	function Person(){
+		this.eat=function(){
+			height++;
+		}
+	}
+	
+	var person=new Person();
+	person.eat();	//执行后，Person.prototype=100,person里面加了一个height属性 值为101；
+
+	绝大多数的对象的最终端是Object.prototype 除了Object.create(null)创建的对象
+	var ming=Object.create(null);	//该对象没有prototype。
+	var ming1=Object.create(原型);	//ming1的__proto__指向Object()对象;
+	Object.create();里面只能是Object和null;
+
+null 和undefined 不能调用tostring方法，因为他们没有指向Object.prototype的原型链,也没有toString方法。
+
+
+
+Number,Array,Boolean 都是重写了toString方法。
+	Number.toString();	//调用的是重写的方法。
+	Number.prototype.toString=function(){
+		return "sasa";
+	}
+	var num=123;
+	num.toString();	//打印sasa;
+
+doucment.write()默认调用toString方法;
+	Object.prototype.toString()=function (){
+		return "mmp";
+	}//重写toString()方法
+
+	var ming =new Object();
+document.write(ming)// 打印mmp.
+
+js小数只能算有效值16位的小数。
+0.14*100不会等于14。
+
+var ming={
+	playgame:function{
+		console.log("I like playgame");
+		return this;
+	}
+	sayName:function(){
+		console.log("I am Ming");
+		return this;
+	}
+}
+	ming.playgame().sayName();
